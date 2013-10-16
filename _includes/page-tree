@@ -1,0 +1,43 @@
+{% comment %}
+vim:filetype=liquid
+{% endcomment %}
+
+{% assign curr_path = '' %}
+{% assign curr_n = 0 %}
+
+<ul>
+  <li><a href="/"{% if page.url == '/index.html' %} class="current"{% endif %}>{{ site.name }}</a></li>
+  <ul>
+
+{% for p in site.pages %}
+  {% assign url = p.url | split: '/' %}
+  {% assign file = url | last %}
+  {% assign path = p.url | replace: file %}
+  {% if path == '/' %}
+    {% assign n = 0 %}
+  {% else %}
+    {% assign n = path | split: '/' | size | minus: 1 %}
+  {% endif %}
+  {% assign diff = n | minus: curr_n %}
+  {% for i in (1..diff) %}
+    <ul>
+  {% endfor %}
+  {% assign diff = diff | times: -1 %}
+  {% for i in (1..diff) %}
+    </ul>
+  {% endfor %}
+  {% if path != curr_path %}
+    {% if path != '/' %}
+      </ul>
+      <li><a href="{{ path }}"{% if page.url == path | append: 'index.html' %} class="current"{% endif %}>{{ path | split: '/' | last }}</a></li>
+      <ul>
+    {% endif %}
+  {% endif %}
+  {% assign curr_path = path %}
+  {% assign curr_n = n %}
+  {% if file != 'index.html' %}
+    <li><a href="{{ p.url }}"{% if p.url == page.url %} class="current"{% endif %}>{{ p.title }}</a></li>
+  {% endif %}
+{% endfor %}
+  </ul>
+</ul>

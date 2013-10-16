@@ -1,0 +1,15 @@
+{% comment %}
+vim:filetype=liquid
+{% endcomment %}
+
+{% assign url = page.url | split: '/' %}
+{% assign file = url | last %}
+{% assign path = page.url | replace: file | replace_first: '/', '' | split: '/' %}
+
+{% assign link = '/' %}
+<a href="{{ link }}">{{ site.name }}</a>
+
+{% for p in path %}
+  {% assign link = link | append: p | append: '/' %}
+ | <a href="{{ link }}">{{ p }}</a>
+{% endfor %}

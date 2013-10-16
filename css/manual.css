@@ -1,0 +1,67 @@
+body {
+  font-family: 'Georgia', serif;
+  font-size: 17px;
+  color: black;
+}
+
+#breadcrumbs {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: yellow;
+  text-align: right;
+}
+
+#page-tree {
+  position: fixed;
+  overflow-y: scroll;
+  float: left;
+  width: 25%;
+  height: 100%;
+}
+
+#content {
+  float: right;
+  width: 75%;
+}
+
+a {
+  text-decoration: none;
+  color: blue;
+}
+#page-tree a:link { color: black; }
+#page-tree a:active { color: black; }
+#page-tree a:visited { color: black; }
+#page-tree a:hover { color: black; }
+
+#page-tree a.current {
+  font-weight: bold;
+}
+
+#page-tree ul {
+  list-style-type: none;
+  list-style: none;
+  margin-left: 0;
+  padding-left: 1em;
+}
+#page-tree * li:before {
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
+}
+#page-tree ul li:before {
+  content: "";
+}
+#page-tree ul ul li:before {
+  content: "■";
+}
+#page-tree ul ul ul li:before {
+  content: "—";
+}
+#page-tree ul ul ul ul li:before {
+  content: "-";
+}
+#page-tree ul ul ul ul ul li:before {
+  content: "·";
+}
