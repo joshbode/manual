@@ -6,15 +6,17 @@
     <title>{{ page.title }}</title>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script src="/js/jquery.toc.js"></script>
-    <link rel="stylesheet" href="/css/toc.css" type="text/css" />
-    <link rel="stylesheet" href="/css/manual.css" type="text/css" />
+    <link rel="stylesheet" href="{{ site.baseurl }}/css/toc.css" type="text/css" />
+    <link rel="stylesheet" href="{{ site.baseurl }}/css/manual.css" type="text/css" />
   </head>
 
   <body>
 
+    <!--
     <div id="breadcrumbs">
       {% include breadcrumbs %}
     </div>
+    -->
 
     <div id="page-tree">
       {% include page-tree %}

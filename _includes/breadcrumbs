@@ -7,9 +7,11 @@ vim:filetype=liquid
 {% assign path = page.url | replace: file | replace_first: '/', '' | split: '/' %}
 
 {% assign link = '/' %}
-<a href="{{ link }}">{{ site.name }}</a>
+<span>
+  <a href="{{ link }}">{{ site.name }}</a>
 
-{% for p in path %}
-  {% assign link = link | append: p | append: '/' %}
- | <a href="{{ link }}">{{ p }}</a>
-{% endfor %}
+  {% for p in path %}
+    {% assign link = link | append: p | append: '/' %}
+    | <a href="{{ site.baseurl }}{{ link }}">{{ p }}</a>
+  {% endfor %}
+</span>

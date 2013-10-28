@@ -2,23 +2,30 @@
 vim:filetype=liquid
 {% endcomment %}
 
-{% assign curr_path = '' %}
-{% assign curr_n = 0 %}
+{% assign page_url = page.url | remove: 'index.html' %}
 
-<ul>
-  <li><a href="/"{% if page.url == '/index.html' %} class="current"{% endif %}>{{ site.name }}</a></li>
-  <ul>
-
+{% assign pages = '' %}
 {% for p in site.pages %}
-  {% assign url = p.url | split: '/' %}
-  {% assign file = url | last %}
-  {% assign path = p.url | replace: file %}
+  {% assign path = p.url | remove: 'index.html' %}
+  {% assign pages = pages | append: '|' | append: path | append: '	' | append: p.title %}
+{% endfor %}
+{% assign pages = pages | remove_first: '|' | split: '|' | sort %}
+
+{% assign last_n = 0 %}
+
+{% for p in pages %}
+  {% assign p = p | split: '	' %}
+  {% assign path = p | split: '	' | first %}
+  {% assign title = p | split: '	' | last %}
+  {% assign file = path | split: '/' | last %}
+
   {% if path == '/' %}
-    {% assign n = 0 %}
+    {% assign n = 1 %}
   {% else %}
-    {% assign n = path | split: '/' | size | minus: 1 %}
+    {% assign n = path | split: '/' | size %}
   {% endif %}
-  {% assign diff = n | minus: curr_n %}
+
+  {% assign diff = n | minus: last_n %}
   {% for i in (1..diff) %}
     <ul>
   {% endfor %}
@@ -26,18 +33,11 @@ vim:filetype=liquid
   {% for i in (1..diff) %}
     </ul>
   {% endfor %}
-  {% if path != curr_path %}
-    {% if path != '/' %}
-      </ul>
-      <li><a href="{{ path }}"{% if page.url == path | append: 'index.html' %} class="current"{% endif %}>{{ path | split: '/' | last }}</a></li>
-      <ul>
-    {% endif %}
-  {% endif %}
-  {% assign curr_path = path %}
-  {% assign curr_n = n %}
-  {% if file != 'index.html' %}
-    <li><a href="{{ p.url }}"{% if p.url == page.url %} class="current"{% endif %}>{{ p.title }}</a></li>
-  {% endif %}
+
+  <li><a href="{{ site.baseurl }}{{ path }}"{% if path == page_url %} class="current"{% endif %}>{{ title }}</a></li>
+  {% assign last_n = n %}
 {% endfor %}
+
+{% for i in (1..n) %}
   </ul>
-</ul>
+{% endfor %}

@@ -9,8 +9,13 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  background-color: yellow;
-  text-align: right;
+  padding-right: 2cm;
+  background-color: greenyellow;
+}
+
+#breadcrumbs span {
+  float: right;
+  margin-right: 20px;
 }
 
 #page-tree {
@@ -51,7 +56,7 @@ a {
   margin-left: -1em;
 }
 #page-tree ul li:before {
-  content: "";
+  content: ">";
 }
 #page-tree ul ul li:before {
   content: "■";

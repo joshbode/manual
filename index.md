@@ -1,6 +1,6 @@
 ---
 title: CMDP User Guide
-layout: bs
+layout: page
 ---
 
 # CMDP User Guide
